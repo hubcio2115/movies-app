@@ -1,9 +1,12 @@
 import { FC } from "react";
+// import api from "./api/api";
+
+import MyHeader from "./components/MyHeader";
 
 const App: FC = () => {
   return (
     <div className="App">
-      <header className="App-header">Movies App</header>
+      <MyHeader />
     </div>
   );
 };
