@@ -1,9 +1,12 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 const MoviesOptions: FC = () => {
   return (
     <div>
-      <button>Dodaj Film</button>
+      <Link to={"/add-form"}>
+        <button>Dodaj Film</button>
+      </Link>
       <select name="category" id="category" placeholder="">
         <option value="" disabled>
           Sortuj wg.

@@ -17,9 +17,9 @@ const App: FC = () => {
     const getAllMovies = async () => {
       const allMovies = await getMovies();
       if (allMovies) setMovies(allMovies.data);
-
-      getAllMovies();
     };
+
+    getAllMovies();
   }, []);
 
   return (
