@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import api from "./api/api";
+import api from "./api/movies";
 
 import MyHeader from "./components/MyHeader";
 import MoviesView from "./components/movies-view/MoviesView";
