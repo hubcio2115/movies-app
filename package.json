@@ -1,5 +1,5 @@
 {
-  "name": "wyszukiwarka-filmow-frontend",
+  "name": "movies-app-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
