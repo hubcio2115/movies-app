@@ -1,6 +1,6 @@
 # Movies-App
 
-I made this project to learn react. Things like, forms, form-validation, talking to the api etc. You may find the code whacy because it is my first real project. Also you can do whatever you want with it if you need it.
+I made this project to learn react. Things like, forms, form-validation, talking to the api etc. You may find the code whaky because it is my first real project. You can find Node.js api [here](https://github.com/hubcio2115/movies-app-backend/tree/master). Do whatever you want with it if you need it.
 
 Also this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
