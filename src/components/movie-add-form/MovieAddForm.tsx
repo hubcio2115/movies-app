@@ -1,120 +1,91 @@
-import {
-  FC,
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEventHandler,
-  useState,
-} from "react";
+import { FC } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 import api from "../../api/movies";
 
 const MovieAddForm: FC = () => {
-  const [movie, setMovie] = useState({
+  const initialValues = {
     title: "",
     director: "",
     genre: "",
     year: 1999,
     description: "",
-    image_url: null as null | string,
+    image_url: "",
+  };
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required("Pole wymagane"),
+    director: Yup.string().required("Pole wymagane"),
+    genre: Yup.string().required("Pole wymagane"),
+    year: Yup.number()
+      .min(1000, "Proszę podać date po roku 1000")
+      .max(
+        new Date().getFullYear(),
+        "Rok nie może być większy niż z dzisiejszej daty"
+      )
+      .required("Pole wymagane"),
+    description: Yup.string().required("Pole wymagane"),
+    image_url: Yup.string().url("Proszę podać ").nullable(),
   });
-
-  const handleChange: ChangeEventHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setMovie({
-      ...movie,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit: FormEventHandler = (e) => {
-    api.post("/movie", movie);
-    e.preventDefault();
-  };
 
   return (
     <div>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          api.post("/movie", values);
         }}
       >
-        <div>
-          <label htmlFor="title">Tytuł: </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="director">Dyrektor: </label>
-          <input
-            type="text"
-            name="director"
-            id="director"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="genre">Gatunek: </label>
-          <input
-            type="text"
-            name="genre"
-            id="genre"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="year">Rok premiery: </label>
-          <input
-            type="number"
-            name="year"
-            id="year"
-            min={1000}
-            max={parseInt(new Date().getFullYear().toString())}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Opis: </label>
-          <textarea
-            name="description"
-            id="description"
-            cols={30}
-            rows={10}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          ></textarea>
-        </div>
-        <div>
-          <label htmlFor="image_url">Zdjęcie: </label>
-          <input
-            type="url"
-            name="image_url"
-            id="image_url"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </div>
-        <button type="submit">Zapisz</button>
-      </form>
+        {({ errors, touched }) => (
+          <Form>
+            <div>
+              <label htmlFor="title">Tytuł: </label>
+              <Field id="title" name="title" type="text" />
+              {errors.title && touched.title ? <div>{errors.title}</div> : null}
+            </div>
+            <div>
+              <label htmlFor="director">Dyrektor: </label>
+              <Field id="director" name="director" type="text" />
+              {errors.director && touched.director ? (
+                <div>{errors.director}</div>
+              ) : null}
+            </div>
+            <div>
+              <label htmlFor="genre">Gatunek: </label>
+              <Field id="genre" name="genre" type="text" />
+              {errors.genre && touched.genre ? <div>{errors.genre}</div> : null}
+            </div>
+            <div>
+              <label htmlFor="year">Rok premiery: </label>
+              <Field id="year" name="year" type="number" />
+              {errors.year && touched.year ? <div>{errors.year}</div> : null}
+            </div>
+            <div>
+              <label htmlFor="description">Opis: </label>
+              <Field
+                as="textarea"
+                id="description"
+                name="description"
+                rows={10}
+                cols={30}
+              />
+              {errors.description && touched.description ? (
+                <div>{errors.description}</div>
+              ) : null}
+            </div>
+            <div>
+              <label htmlFor="image_url">Zdjęcie: </label>
+              <Field id="image_url" name="image_url" type="url" />
+              {errors.image_url && touched.image_url ? (
+                <div>{errors.image_url}</div>
+              ) : null}
+            </div>
+            <button type="submit">Zapisz</button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
