@@ -32,6 +32,7 @@ const MovieAddForm: FC = () => {
 
   return (
     <div>
+      <h2>Dodaj Film</h2>
       <Link to={"/"}>
         <button>Powrót</button>
       </Link>
