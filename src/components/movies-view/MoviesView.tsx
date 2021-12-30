@@ -26,7 +26,9 @@ const MoviesView: FC<Props> = ({ movies }) => {
     <div>
       <h1>Lista Filmów</h1>
       <MoviesOptions />
+      <hr />
       {movies ? <MoviesList movies={movies} /> : <NoMovies />}
+      <hr />
       <MoviesFavorites />
     </div>
   );
