@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 import api from "../../api/movies";
+import { Link } from "react-router-dom";
 
 const MovieAddForm: FC = () => {
   const initialValues = {
@@ -31,6 +32,10 @@ const MovieAddForm: FC = () => {
 
   return (
     <div>
+      <h2>Dodaj Film</h2>
+      <Link to={"/"}>
+        <button>Powrót</button>
+      </Link>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

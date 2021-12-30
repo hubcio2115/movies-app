@@ -1,32 +1,54 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
+import api from "../../api/movies";
 
 import MoviesOptions from "./MoviesOptions";
-import MoviesList from "./MoviesList";
+import MovieCard from "./MovieCard";
 import MoviesFavorites from "./MoviesFavorites";
 import NoMovies from "./NoMovies";
 
-interface Props {
-  movies?: [
-    {
-      id?: number;
-      title?: string;
-      director?: string;
-      genre?: string;
-      year?: number;
-      description?: string;
-      image_url?: string;
-      rating_count?: number;
-      rating?: number;
-    }
-  ];
+interface Movie {
+  id: number;
+  title: string;
+  director: string;
+  genre: string;
+  year: number;
+  description: string;
+  image_url: string;
+  rating_count: number;
+  rating: number;
 }
 
-const MoviesView: FC<Props> = ({ movies }) => {
+const MoviesView: FC = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const getMovies = async () => {
+    return await api.get("/movies");
+  };
+
+  useEffect(() => {
+    const getAllMovies = async () => {
+      const allMovies = await getMovies();
+      if (allMovies) setMovies(allMovies.data);
+    };
+
+    getAllMovies();
+  }, []);
+
   return (
     <div>
-      <h1>Lista Filmów</h1>
+      <h2>Lista Filmów</h2>
       <MoviesOptions />
-      {movies ? <MoviesList movies={movies} /> : <NoMovies />}
+      <hr />
+      {movies.length ? (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
+          {movies.map((movie) => {
+            return <MovieCard key={movie.id} movie={movie} />;
+          })}
+        </div>
+      ) : (
+        <NoMovies />
+      )}
+      <hr />
       <MoviesFavorites />
     </div>
   );
