@@ -1,7 +1,18 @@
-import { FC } from "react";
+import {
+  FC,
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { Link } from "react-router-dom";
 
-const MoviesOptions: FC = () => {
+interface Props {
+  filterTitle: string;
+  setFilterTitle: Dispatch<SetStateAction<string>>;
+}
+
+const MoviesOptions: FC<Props> = ({ filterTitle, setFilterTitle }) => {
   return (
     <div>
       <Link to={"/add-form"}>
@@ -16,7 +27,12 @@ const MoviesOptions: FC = () => {
         <option value="genre">Gatunek</option>
         <option value="year">Rok</option>
       </select>
-      <input type="text" placeholder="Wyszukaj film..." />
+      <input
+        type="text"
+        placeholder="Wyszukaj film..."
+        value={filterTitle}
+        onChange={(e) => setFilterTitle(e.target.value)}
+      />
     </div>
   );
 };

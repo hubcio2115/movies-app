@@ -20,6 +20,10 @@ interface Movie {
 
 const MoviesView: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [filterTitle, setFilterTitle] = useState("");
+  const moviesData = movies.filter((movie) => {
+    return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
+  });
 
   const getMovies = async () => {
     return await api.get("/movies");
@@ -37,11 +41,14 @@ const MoviesView: FC = () => {
   return (
     <div>
       <h2>Lista Filmów</h2>
-      <MoviesOptions />
+      <MoviesOptions
+        filterTitle={filterTitle}
+        setFilterTitle={setFilterTitle}
+      />
       <hr />
-      {movies.length ? (
+      {moviesData.length ? (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {movies.map((movie) => {
+          {moviesData.map((movie) => {
             return <MovieCard key={movie.id} movie={movie} />;
           })}
         </div>
