@@ -1,10 +1,4 @@
-import {
-  FC,
-  ChangeEvent,
-  ChangeEventHandler,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { FC, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
