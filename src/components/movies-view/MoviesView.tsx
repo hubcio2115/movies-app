@@ -1,25 +1,19 @@
 import { FC, useState, useEffect } from "react";
-import api from "../../api/movies";
+import api from "../..//api/movies";
+
+import Movie from "../../interfaces/Movie";
 
 import MoviesOptions from "./MoviesOptions";
 import MovieCard from "./MovieCard";
 import MoviesFavorites from "./MoviesFavorites";
 import NoMovies from "./NoMovies";
 
-interface Movie {
-  id: number;
-  title: string;
-  director: string;
-  genre: string;
-  year: number;
-  description: string;
-  image_url: string;
-  rating_count: number;
-  rating: number;
-}
-
 const MoviesView: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [filterTitle, setFilterTitle] = useState("");
+  const moviesFilterHelper = movies.filter((movie) => {
+    return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
+  });
 
   const getMovies = async () => {
     return await api.get("/movies");
@@ -37,13 +31,25 @@ const MoviesView: FC = () => {
   return (
     <div>
       <h2>Lista Filmów</h2>
-      <MoviesOptions />
+      <MoviesOptions
+        movies={movies}
+        setMovies={setMovies}
+        filterTitle={filterTitle}
+        setFilterTitle={setFilterTitle}
+      />
       <hr />
-      {movies.length ? (
+      {moviesFilterHelper.length ? (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {movies.map((movie) => {
-            return <MovieCard key={movie.id} movie={movie} />;
-          })}
+          {movies
+            .filter((movie) => {
+              return (
+                movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !==
+                -1
+              );
+            })
+            .map((movie) => {
+              return <MovieCard key={movie.id} movie={movie} />;
+            })}
         </div>
       ) : (
         <NoMovies />
