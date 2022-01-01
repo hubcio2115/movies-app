@@ -1,54 +1,40 @@
-import {
-  FC,
-  useState,
-  Dispatch,
-  SetStateAction,
-  ChangeEventHandler,
-  ChangeEvent,
-} from "react";
+import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../../interfaces/Movie";
 
+type SortType = "title" | "genre" | "year";
+
 interface Props {
-  sortedMovies: Movie[];
-  setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
+  movies: Movie[];
+  setMovies: Dispatch<SetStateAction<Movie[]>>;
   filterTitle: string;
   setFilterTitle: Dispatch<SetStateAction<string>>;
 }
 
 const MoviesOptions: FC<Props> = ({
-  sortedMovies,
-  setSortedMovies,
+  movies,
+  setMovies,
   filterTitle,
   setFilterTitle,
 }) => {
-  const [selectedValue, setSelectedValue] = useState<
-    "title" | "genre" | "year" | ""
-  >("");
+  const [sortType, setSortType] = useState<SortType | "">("");
 
-  const handleSort: ChangeEventHandler = (
-    e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setSelectedValue(e.target.value as "title" | "genre" | "year");
-    let temp = sortedMovies;
-
-    temp.sort((current, next) => {
-      if (
-        current[selectedValue as "title" | "genre" | "year"] >
-        next[selectedValue as "title" | "genre" | "year"]
-      ) {
+  useEffect(() => {
+    const sortMovies = (type: SortType) => {
+      const sorted = [...movies].sort((current, next) => {
+        if (current[type] < next[type]) {
+          return -1;
+        } else if (current[type] === next[type]) {
+          return 0;
+        }
         return 1;
-      } else if (
-        current[selectedValue as "title" | "genre" | "year"] ===
-        next[selectedValue as "title" | "genre" | "year"]
-      ) {
-        return 0;
-      }
-      return -1;
-    });
+      });
 
-    setSortedMovies(temp);
-  };
+      setMovies(sorted);
+    };
+
+    sortMovies(sortType as SortType);
+  }, [setMovies, sortType]);
 
   return (
     <div>
@@ -58,8 +44,8 @@ const MoviesOptions: FC<Props> = ({
       <select
         name="category"
         id="category"
-        value={selectedValue}
-        onChange={(e) => handleSort(e)}
+        value={sortType}
+        onChange={(e) => setSortType(e.target.value as SortType)}
       >
         <option value="" disabled>
           Sortuj wg.
