@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
-import api from "../..//api/movies";
+import { Link } from "react-router-dom";
+import api from "../../api/movies";
 
 import Movie from "../../interfaces/Movie";
 
@@ -11,6 +12,7 @@ import NoMovies from "./NoMovies";
 const MoviesView: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filterTitle, setFilterTitle] = useState("");
+
   const moviesFilterHelper = movies.filter((movie) => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
   });
@@ -48,7 +50,11 @@ const MoviesView: FC = () => {
               );
             })
             .map((movie) => {
-              return <MovieCard key={movie.id} movie={movie} />;
+              return (
+                <Link to={`/movie-details/${movie.id}`}>
+                  <MovieCard key={movie.id} movie={movie} />
+                </Link>
+              );
             })}
         </div>
       ) : (
