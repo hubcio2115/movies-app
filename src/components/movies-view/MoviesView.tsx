@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../../api/movies";
 
 import Movie from "../../interfaces/Movie";
+import url from "../../types/url";
 
 import MoviesOptions from "./MoviesOptions";
 import MovieCard from "./MovieCard";
@@ -17,17 +18,13 @@ const MoviesView: FC = () => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
   });
 
-  const getMovies = async () => {
-    return await api.get("/movies");
-  };
-
   useEffect(() => {
-    const getAllMovies = async () => {
-      const allMovies = await getMovies();
-      if (allMovies) setMovies(allMovies.data);
+    const fetchData = async (url: url) => {
+      const res = await api.get(url);
+      setMovies(res.data);
     };
 
-    getAllMovies();
+    fetchData("/movies");
   }, []);
 
   return (
@@ -51,8 +48,8 @@ const MoviesView: FC = () => {
             })
             .map((movie) => {
               return (
-                <Link to={`/movie-details/${movie.id}`}>
-                  <MovieCard key={movie.id} movie={movie} />
+                <Link to={`/movie-details/${movie.id}`} key={movie.id}>
+                  <MovieCard movie={movie} />
                 </Link>
               );
             })}

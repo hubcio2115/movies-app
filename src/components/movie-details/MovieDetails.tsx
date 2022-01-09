@@ -1,28 +1,25 @@
 import { FC, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import api from "../../api/movies";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import api from "../../api/movies";
 
 import Movie from "../../interfaces/Movie";
-import { Field, Form, Formik } from "formik";
+import url from "../../types/url";
 
 const MovieDetails: FC = () => {
   const params = useParams();
   const [movie, setMovies] = useState<Movie>({} as Movie);
   const [isEditing, setIsEditing] = useState(false);
 
-  const getMovies = async () => {
-    return await api.get(`/movie/${params.movieId}`);
-  };
-
   useEffect(() => {
-    const getAllMovies = async () => {
-      const allMovies = await getMovies();
-      if (allMovies) setMovies(allMovies.data);
+    const fetchData = async (url: url) => {
+      const res = await api.get(url);
+      setMovies(res.data);
     };
 
-    getAllMovies();
-  });
+    fetchData(`/movie/${params.movieId}`);
+  }, [params.movieId]);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Pole wymagane"),
