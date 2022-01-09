@@ -13,12 +13,12 @@ const MovieDetails: FC = () => {
   const params = useParams();
 
   useEffect(() => {
-    const fetchData = async (url: url) => {
+    const getMovie = async (url: url) => {
       const res = await api.get(url);
       setMovies(res.data);
     };
 
-    fetchData(`/movie/${params.movieId}`);
+    getMovie(`/movie/${params.movieId}`);
   }, [params.movieId]);
 
   const validationSchema = Yup.object().shape({

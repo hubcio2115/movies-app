@@ -19,12 +19,12 @@ const MoviesView: FC = () => {
   });
 
   useEffect(() => {
-    const fetchData = async (url: url) => {
+    const getMovies = async (url: url) => {
       const res = await api.get(url);
       setMovies(res.data);
     };
 
-    fetchData("/movies");
+    getMovies("/movies");
   }, []);
 
   return (
