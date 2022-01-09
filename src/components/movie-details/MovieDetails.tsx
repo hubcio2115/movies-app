@@ -8,9 +8,9 @@ import Movie from "../../interfaces/Movie";
 import url from "../../types/url";
 
 const MovieDetails: FC = () => {
-  const params = useParams();
   const [movie, setMovies] = useState<Movie>({} as Movie);
   const [isEditing, setIsEditing] = useState(false);
+  const params = useParams();
 
   useEffect(() => {
     const fetchData = async (url: url) => {
