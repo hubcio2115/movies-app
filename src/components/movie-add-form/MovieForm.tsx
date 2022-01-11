@@ -10,6 +10,7 @@ interface Props {
   isAddForm: boolean;
   initialValues?: Movie;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
+  setMovie: Dispatch<SetStateAction<Movie>>;
 }
 
 const MovieForm: FC<Props> = ({
@@ -23,6 +24,7 @@ const MovieForm: FC<Props> = ({
     image_url: "",
   },
   setIsEditing,
+  setMovie,
 }) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Pole wymagane"),
@@ -57,6 +59,12 @@ const MovieForm: FC<Props> = ({
             api.post("/movie", values);
           } else {
             api.put(`/movie/${initialValues.id}`, values);
+            setMovie({
+              id: initialValues.id,
+              ...values,
+              rating: initialValues.rating as number,
+              rating_count: initialValues.rating_count as number,
+            } as Movie);
             setIsEditing(false);
           }
         }}

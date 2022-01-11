@@ -14,7 +14,13 @@ const App: FC = () => {
         <Route path="/" element={<MoviesView />} />
         <Route
           path="/add-form"
-          element={<MovieAddForm isAddForm={true} setIsEditing={() => {}} />}
+          element={
+            <MovieAddForm
+              isAddForm={true}
+              setIsEditing={() => {}}
+              setMovie={() => {}}
+            />
+          }
         />
         <Route path="/movie-details/:movieId" element={<MovieDetails />} />
       </Routes>

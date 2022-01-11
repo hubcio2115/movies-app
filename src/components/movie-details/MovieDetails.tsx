@@ -8,7 +8,7 @@ import Movie from "../../interfaces/Movie";
 import url from "../../types/url";
 
 const MovieDetails: FC = () => {
-  const [movie, setMovies] = useState<Movie>({} as Movie);
+  const [movie, setMovie] = useState<Movie>({} as Movie);
   const [isEditing, setIsEditing] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const MovieDetails: FC = () => {
   useEffect(() => {
     const getMovie = async (url: url) => {
       const res = await api.get(url);
-      setMovies(res.data);
+      setMovie(res.data);
     };
 
     getMovie(`/movie/${params.movieId}`);
@@ -66,6 +66,7 @@ const MovieDetails: FC = () => {
           initialValues={{
             ...movie,
           }}
+          setMovie={setMovie}
         />
       ) : (
         <div style={{ width: "300px" }}>
