@@ -41,10 +41,14 @@ const MovieForm: FC<Props> = ({
 
   return (
     <div>
-      <h2>Dodaj Film</h2>
-      <Link to={"/"}>
-        <button>Powrót</button>
-      </Link>
+      {isAddForm ? (
+        <>
+          <h2>Dodaj Film</h2>
+          <Link to={"/"}>
+            <button>Powrót</button>
+          </Link>
+        </>
+      ) : null}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
