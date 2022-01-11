@@ -1,20 +1,29 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Formik, Form, Field } from "formik";
+import { Link } from "react-router-dom";
+import api from "../../api/movies";
 import * as Yup from "yup";
 
-import api from "../../api/movies";
-import { Link } from "react-router-dom";
+import Movie from "../../interfaces/Movie";
 
-const MovieAddForm: FC = () => {
-  const initialValues = {
+interface Props {
+  isAddForm: boolean;
+  initialValues?: Movie;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
+}
+
+const MovieForm: FC<Props> = ({
+  isAddForm,
+  initialValues = {
     title: "",
     director: "",
     genre: "",
     year: 1999,
     description: "",
     image_url: "",
-  };
-
+  },
+  setIsEditing,
+}) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Pole wymagane"),
     director: Yup.string().required("Pole wymagane"),
@@ -40,7 +49,12 @@ const MovieAddForm: FC = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          api.post("/movie", values);
+          if (isAddForm) {
+            api.post("/movie", values);
+          } else {
+            api.put(`/movie/${initialValues.id}`, values);
+            setIsEditing(false);
+          }
         }}
       >
         {({ errors, touched }) => (
@@ -95,4 +109,4 @@ const MovieAddForm: FC = () => {
   );
 };
 
-export default MovieAddForm;
+export default MovieForm;
