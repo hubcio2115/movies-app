@@ -45,9 +45,19 @@ const MovieDetails: FC = () => {
   return (
     <div>
       <h2>Szczegóły filmu</h2>
-      <Link to={"/"}>
-        <button>Powrót</button>
-      </Link>
+      {isEditing ? (
+        <button
+          onClick={() => {
+            setIsEditing(!isEditing);
+          }}
+        >
+          Powrót
+        </button>
+      ) : (
+        <Link to={"/"}>
+          <button>Powrót</button>
+        </Link>
+      )}
       <button
         onClick={() => {
           setIsEditing(!isEditing);
