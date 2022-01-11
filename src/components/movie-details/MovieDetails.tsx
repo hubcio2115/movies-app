@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import api from "../../api/movies";
@@ -11,6 +11,7 @@ const MovieDetails: FC = () => {
   const [movie, setMovies] = useState<Movie>({} as Movie);
   const [isEditing, setIsEditing] = useState(false);
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMovie = async (url: url) => {
@@ -20,6 +21,11 @@ const MovieDetails: FC = () => {
 
     getMovie(`/movie/${params.movieId}`);
   }, [params.movieId]);
+
+  const handleDeleteMovie = () => {
+    api.delete(`/movie/${params.movieId}`);
+    navigate("/");
+  };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Pole wymagane"),
@@ -48,6 +54,13 @@ const MovieDetails: FC = () => {
         }}
       >
         Edytuj
+      </button>
+      <button
+        onClick={() => {
+          handleDeleteMovie();
+        }}
+      >
+        ❌
       </button>
       {isEditing ? (
         <Formik
