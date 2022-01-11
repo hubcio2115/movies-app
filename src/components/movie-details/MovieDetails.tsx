@@ -65,13 +65,15 @@ const MovieDetails: FC = () => {
       >
         Edytuj
       </button>
-      <button
-        onClick={() => {
-          handleDeleteMovie();
-        }}
-      >
-        ❌
-      </button>
+      {isEditing ? null : (
+        <button
+          onClick={() => {
+            handleDeleteMovie();
+          }}
+        >
+          ❌
+        </button>
+      )}
       {isEditing ? (
         <Formik
           initialValues={movie}
