@@ -1,5 +1,7 @@
 import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import { forEachChild } from "typescript";
+import api from "../../api/movies";
 import Movie from "../../interfaces/Movie";
 
 type SortType = "title" | "genre" | "year";
@@ -9,6 +11,9 @@ interface Props {
   setMovies: Dispatch<SetStateAction<Movie[]>>;
   filterTitle: string;
   setFilterTitle: Dispatch<SetStateAction<string>>;
+  isSelecting: boolean;
+  setIsSelecting: Dispatch<SetStateAction<boolean>>;
+  selectedMovies: number[];
 }
 
 const MoviesOptions: FC<Props> = ({
@@ -16,6 +21,9 @@ const MoviesOptions: FC<Props> = ({
   setMovies,
   filterTitle,
   setFilterTitle,
+  isSelecting,
+  setIsSelecting,
+  selectedMovies,
 }) => {
   const [sortType, setSortType] = useState<SortType | "">("");
 
@@ -35,6 +43,18 @@ const MoviesOptions: FC<Props> = ({
 
     sortMovies(sortType as SortType);
   }, [setMovies, sortType]);
+
+  const handleDeleteMovie = () => {
+    selectedMovies.forEach((movieId) => {
+      api.delete(`/movie/${movieId}`);
+
+      const temp = [...movies].filter((movie) => {
+        return movie.id !== movieId;
+      });
+
+      setMovies(temp);
+    });
+  };
 
   return (
     <div>
@@ -60,6 +80,22 @@ const MoviesOptions: FC<Props> = ({
         value={filterTitle}
         onChange={(e) => setFilterTitle(e.target.value)}
       />
+      <button
+        onClick={() => {
+          setIsSelecting(!isSelecting);
+        }}
+      >
+        Zaznacz
+      </button>
+      {!isSelecting ? null : (
+        <button
+          onClick={() => {
+            handleDeleteMovie();
+          }}
+        >
+          ❌
+        </button>
+      )}
     </div>
   );
 };
