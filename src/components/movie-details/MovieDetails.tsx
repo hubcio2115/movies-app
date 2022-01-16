@@ -70,7 +70,12 @@ const MovieDetails: FC = () => {
         />
       ) : (
         <div style={{ width: "300px" }}>
-          <img src={movie.image_url} alt="movie-poster" />
+          <img
+            src={movie.image_url}
+            alt="movie-poster"
+            width={220}
+            height={330}
+          />
           <p>{movie.title}</p>
           <p>{movie.director}</p>
           <p>{movie.genre}</p>
