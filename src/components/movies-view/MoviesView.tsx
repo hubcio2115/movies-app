@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import api from "../../api/movies";
 
 import Movie from "../../interfaces/Movie";
@@ -13,6 +13,8 @@ import NoMovies from "./NoMovies";
 const MoviesView: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filterTitle, setFilterTitle] = useState("");
+  const [selectedMovies, setSelectedMovies] = useState<number[]>([]);
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const moviesFilterHelper = movies.filter((movie) => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
@@ -35,6 +37,9 @@ const MoviesView: FC = () => {
         setMovies={setMovies}
         filterTitle={filterTitle}
         setFilterTitle={setFilterTitle}
+        isSelecting={isSelecting}
+        setIsSelecting={setIsSelecting}
+        selectedMovies={selectedMovies}
       />
       <hr />
       {moviesFilterHelper.length ? (
@@ -48,9 +53,13 @@ const MoviesView: FC = () => {
             })
             .map((movie) => {
               return (
-                <Link to={`/movie-details/${movie.id}`} key={movie.id}>
-                  <MovieCard movie={movie} />
-                </Link>
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  isSelecting={isSelecting}
+                  selectedMovies={selectedMovies}
+                  setSelectedMovies={setSelectedMovies}
+                />
               );
             })}
         </div>
