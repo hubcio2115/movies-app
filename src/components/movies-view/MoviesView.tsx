@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import api from "../../api/movies";
 
@@ -7,10 +7,15 @@ import url from "../../types/url";
 
 import MoviesOptions from "./MoviesOptions";
 import MovieCard from "./MovieCard";
-import MoviesFavorites from "./MoviesFavorites";
+import MoviesFavorites from "../favorite-movies/MoviesFavorites";
 import NoMovies from "./NoMovies";
 
-const MoviesView: FC = () => {
+interface Props {
+  favoriteMovies: Movie[];
+  setFavoriteMovies: Dispatch<SetStateAction<Movie[]>>;
+}
+
+const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filterTitle, setFilterTitle] = useState("");
   const [selectedMovies, setSelectedMovies] = useState<number[]>([]);
@@ -59,6 +64,9 @@ const MoviesView: FC = () => {
                   isSelecting={isSelecting}
                   selectedMovies={selectedMovies}
                   setSelectedMovies={setSelectedMovies}
+                  favoriteMovies={favoriteMovies}
+                  setFavoriteMovies={setFavoriteMovies}
+                  isFavoriteProp={false}
                 />
               );
             })}
@@ -67,7 +75,10 @@ const MoviesView: FC = () => {
         <NoMovies />
       )}
       <hr />
-      <MoviesFavorites />
+      <MoviesFavorites
+        favoriteMovies={favoriteMovies}
+        setFavoriteMovies={setFavoriteMovies}
+      />
     </div>
   );
 };

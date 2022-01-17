@@ -1,21 +1,28 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../../interfaces/Movie";
 
 interface Props {
   movie: Movie;
-  isSelecting: boolean;
-  selectedMovies: number[];
-  setSelectedMovies: Dispatch<SetStateAction<number[]>>;
+  isSelecting?: boolean;
+  selectedMovies?: number[];
+  setSelectedMovies?: Dispatch<SetStateAction<number[]>>;
+  favoriteMovies: Movie[];
+  setFavoriteMovies: Dispatch<SetStateAction<Movie[]>>;
+  isFavoriteProp: boolean;
 }
 
 const MovieCard: FC<Props> = ({
   movie,
   isSelecting,
-  selectedMovies,
-  setSelectedMovies,
+  selectedMovies = [],
+  setSelectedMovies = () => {},
+  favoriteMovies,
+  setFavoriteMovies,
+  isFavoriteProp,
 }) => {
   const [checked, setChecked] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
 
   const handleCheckbox = () => {
     setChecked(!checked);
@@ -30,6 +37,28 @@ const MovieCard: FC<Props> = ({
       setSelectedMovies(temp);
     }
   };
+
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      setIsFavorite(true);
+
+      setFavoriteMovies([...favoriteMovies, movie]);
+    } else {
+      setIsFavorite(false);
+
+      const temp = [...favoriteMovies].filter((favoriteMovie) => {
+        return favoriteMovie.id !== movie.id;
+      });
+
+      setFavoriteMovies(temp);
+    }
+  };
+
+  useEffect(() => {
+    if (favoriteMovies.indexOf(movie) === -1) {
+      setIsFavorite(false);
+    }
+  }, [favoriteMovies, movie]);
 
   return (
     <div style={{ width: "300px" }}>
@@ -57,6 +86,13 @@ const MovieCard: FC<Props> = ({
           }}
         />
       ) : null}
+      <button
+        onClick={() => {
+          handleFavorite();
+        }}
+      >
+        {isFavorite ? "👎🏻" : "⭐️"}
+      </button>
     </div>
   );
 };
