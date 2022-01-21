@@ -9,8 +9,8 @@ import Movie from "../../interfaces/Movie";
 interface Props {
   isAddForm: boolean;
   initialValues?: Movie;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
-  setMovie: Dispatch<SetStateAction<Movie>>;
+  setIsEditing?: Dispatch<SetStateAction<boolean>>;
+  setMovie?: Dispatch<SetStateAction<Movie>>;
 }
 
 const MovieForm: FC<Props> = ({
@@ -23,8 +23,8 @@ const MovieForm: FC<Props> = ({
     description: "",
     image_url: "",
   },
-  setIsEditing,
-  setMovie,
+  setIsEditing = () => {},
+  setMovie = () => {},
 }) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Pole wymagane"),

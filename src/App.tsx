@@ -23,16 +23,7 @@ const App: FC = () => {
             />
           }
         />
-        <Route
-          path="/add-form"
-          element={
-            <MovieAddForm
-              isAddForm={true}
-              setIsEditing={() => {}}
-              setMovie={() => {}}
-            />
-          }
-        />
+        <Route path="/add-form" element={<MovieAddForm isAddForm={true} />} />
         <Route path="/movie-details/:movieId" element={<MovieDetails />} />
       </Routes>
     </div>
