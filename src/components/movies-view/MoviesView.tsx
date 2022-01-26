@@ -24,7 +24,6 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const [isSelecting, setIsSelecting] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(4);
 
   const moviesFilterHelper = movies.filter((movie) => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
@@ -39,6 +38,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
     getMovies("/movies");
   }, []);
 
+  const moviesPerPage = 4;
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
   const currentMovies = moviesFilterHelper.slice(
