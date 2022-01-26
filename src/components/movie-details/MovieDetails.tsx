@@ -6,10 +6,12 @@ import MovieForm from "../movie-add-form/MovieForm";
 
 import Movie from "../../interfaces/Movie";
 import url from "../../types/url";
+import { Rating, Typography } from "@mui/material";
 
 const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<Movie>({} as Movie);
   const [isEditing, setIsEditing] = useState(false);
+  const [rating, setRating] = useState(0);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -17,14 +19,20 @@ const MovieDetails: FC = () => {
     const getMovie = async (url: url) => {
       const res = await api.get(url);
       setMovie(res.data);
+      setRating(movie.rating);
     };
 
     getMovie(`/movie/${params.movieId}`);
-  }, [params.movieId]);
+  }, [params.movieId, movie.rating]);
 
   const handleDeleteMovie = () => {
     api.delete(`/movie/${params.movieId}`);
     navigate("/");
+  };
+
+  const handleRating = (value: number) => {
+    api.patch(`/movie/${movie.id}/rate`, null, { params: { score: value } });
+    setRating(value);
   };
 
   return (
@@ -81,6 +89,14 @@ const MovieDetails: FC = () => {
           <p>{movie.genre}</p>
           <p>{movie.year}</p>
           <p>{movie.description}</p>
+          <Typography component="legend">
+            <Rating
+              name="controlled"
+              defaultValue={movie.rating}
+              value={rating}
+              onChange={(e, v) => handleRating(v as number)}
+            />
+          </Typography>
         </div>
       )}
     </div>
