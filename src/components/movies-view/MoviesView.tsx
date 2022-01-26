@@ -9,6 +9,7 @@ import MoviesOptions from "./MoviesOptions";
 import MovieCard from "./MovieCard";
 import MoviesFavorites from "../favorite-movies/MoviesFavorites";
 import NoMovies from "./NoMovies";
+import { Pagination } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -18,8 +19,12 @@ interface Props {
 const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filterTitle, setFilterTitle] = useState("");
+
   const [selectedMovies, setSelectedMovies] = useState<number[]>([]);
   const [isSelecting, setIsSelecting] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage, setMoviesPerPage] = useState(4);
 
   const moviesFilterHelper = movies.filter((movie) => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
@@ -33,6 +38,13 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
 
     getMovies("/movies");
   }, []);
+
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = moviesFilterHelper.slice(
+    indexOfFirstMovie,
+    indexOfLastMovie
+  );
 
   return (
     <div>
@@ -49,7 +61,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
       <hr />
       {moviesFilterHelper.length ? (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {movies
+          {currentMovies
             .filter((movie) => {
               return (
                 movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !==
@@ -70,6 +82,13 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
                 />
               );
             })}
+          <Pagination
+            count={Math.ceil(moviesFilterHelper.length / moviesPerPage)}
+            page={currentPage}
+            onChange={(e, v) => {
+              setCurrentPage(v);
+            }}
+          />
         </div>
       ) : (
         <NoMovies />
