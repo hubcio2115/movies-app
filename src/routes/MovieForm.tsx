@@ -1,10 +1,10 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
-import api from "../../api/movies";
+import api from "api/movies";
 import * as Yup from "yup";
 
-import Movie from "../../interfaces/Movie";
+import Movie from "interfaces/Movie";
 
 interface Props {
   isAddForm: boolean;

@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import MyHeader from "./components/MyHeader";
-import MoviesView from "./components/movies-view/MoviesView";
-import MovieAddForm from "./components/movie-add-form/MovieForm";
-import MovieDetails from "./components/movie-details/MovieDetails";
+import MyHeader from "components/MyHeader";
+import MoviesView from "routes/MoviesView";
+import MovieAddForm from "routes/MovieForm";
+import MovieDetails from "routes/MovieDetails";
 
 import Movie from "./interfaces/Movie";
 

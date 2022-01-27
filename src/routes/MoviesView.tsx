@@ -1,15 +1,15 @@
 import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
-
-import api from "../../api/movies";
-
-import Movie from "../../interfaces/Movie";
-import url from "../../types/url";
-
-import MoviesOptions from "./MoviesOptions";
-import MovieCard from "./MovieCard";
-import MoviesFavorites from "../favorite-movies/MoviesFavorites";
-import NoMovies from "./NoMovies";
 import { Pagination } from "@mui/material";
+
+import api from "api/movies";
+
+import Movie from "interfaces/Movie";
+import url from "types/url";
+
+import MoviesFavorites from "components/favorite-movies/MoviesFavorites";
+import MoviesOptions from "components/movies-view/MoviesOptions";
+import MovieCard from "components/movies-view/MovieCard";
+import NoMovies from "components/movies-view/NoMovies";
 
 interface Props {
   favoriteMovies: Movie[];

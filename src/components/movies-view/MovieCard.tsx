@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Movie from "../../interfaces/Movie";
+
+import Movie from "interfaces/Movie";
 
 interface Props {
   movie: Movie;

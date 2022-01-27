@@ -1,8 +1,8 @@
 import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import api from "api/movies";
 
-import api from "../../api/movies";
-import Movie from "../../interfaces/Movie";
+import Movie from "interfaces/Movie";
 
 type SortType = "title" | "genre" | "year";
 
@@ -42,6 +42,7 @@ const MoviesOptions: FC<Props> = ({
     };
 
     sortMovies(sortType as SortType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setMovies, sortType]);
 
   const handleDeleteMovie = () => {

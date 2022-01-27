@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction } from "react";
 
-import MovieCard from "../movies-view/MovieCard";
+import Movie from "interfaces/Movie";
 
-import Movie from "../../interfaces/Movie";
-import NoFavoriteMovies from "./NoFavoriteMovies";
+import MovieCard from "components/movies-view/MovieCard";
+import NoFavoriteMovies from "components/favorite-movies/NoFavoriteMovies";
 
 interface Props {
   favoriteMovies: Movie[];
