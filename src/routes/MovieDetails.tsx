@@ -3,10 +3,10 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { Rating, Typography } from "@mui/material";
 import api from "api/movies";
 
-import MovieForm from "routes/MovieForm";
-
 import Movie from "interfaces/Movie";
 import url from "types/url";
+
+import MovieForm from "routes/MovieForm";
 
 const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<Movie>({} as Movie);

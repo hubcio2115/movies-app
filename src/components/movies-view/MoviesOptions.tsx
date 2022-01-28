@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+
 import api from "api/movies";
 
 import Movie from "interfaces/Movie";
