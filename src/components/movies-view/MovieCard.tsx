@@ -58,6 +58,8 @@ const MovieCard: FC<Props> = ({
   useEffect(() => {
     if (favoriteMovies.indexOf(movie) === -1) {
       setIsFavorite(false);
+    } else {
+      setIsFavorite(true);
     }
   }, [favoriteMovies, movie]);
 
