@@ -1,31 +1,39 @@
-import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
+import {
+  FC,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useContext,
+} from "react";
 import { Link } from "react-router-dom";
 
 import api from "api/movies";
-
+import MoviesContext from "MoviesContext";
 import Movie from "interfaces/Movie";
 
-type SortType = "title" | "genre" | "year";
-
 interface Props {
-  movies: Movie[];
-  setMovies: Dispatch<SetStateAction<Movie[]>>;
+  setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
   filterTitle: string;
   setFilterTitle: Dispatch<SetStateAction<string>>;
   isSelecting: boolean;
   setIsSelecting: Dispatch<SetStateAction<boolean>>;
   selectedMovies: number[];
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
+type SortType = "title" | "genre" | "year";
+
 const MoviesOptions: FC<Props> = ({
-  movies,
-  setMovies,
+  setSortedMovies,
   filterTitle,
   setFilterTitle,
   isSelecting,
   setIsSelecting,
   selectedMovies,
+  setCurrentPage,
 }) => {
+  const { movies, setMovies } = useContext(MoviesContext);
   const [sortType, setSortType] = useState<SortType | "">("");
 
   useEffect(() => {
@@ -39,12 +47,11 @@ const MoviesOptions: FC<Props> = ({
         return 1;
       });
 
-      setMovies(sorted);
+      setSortedMovies(sorted);
     };
 
     sortMovies(sortType as SortType);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setMovies, sortType]);
+  }, [movies, setSortedMovies, sortType]);
 
   const handleDeleteMovie = () => {
     selectedMovies.forEach((movieId) => {
@@ -80,7 +87,10 @@ const MoviesOptions: FC<Props> = ({
         type="text"
         placeholder="Wyszukaj film..."
         value={filterTitle}
-        onChange={(e) => setFilterTitle(e.target.value)}
+        onChange={(e) => {
+          setFilterTitle(e.target.value);
+          setCurrentPage(1);
+        }}
       />
       <button
         onClick={() => {
