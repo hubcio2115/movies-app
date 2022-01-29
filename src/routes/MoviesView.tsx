@@ -1,15 +1,13 @@
-import { FC, useState, useEffect, Dispatch, SetStateAction } from "react";
+import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
 import { Pagination } from "@mui/material";
 
-import api from "api/movies";
-
 import Movie from "interfaces/Movie";
-import url from "types/url";
 
 import MoviesFavorites from "components/favorite-movies/MoviesFavorites";
 import MoviesOptions from "components/movies-view/MoviesOptions";
 import MovieCard from "components/movies-view/MovieCard";
 import NoMovies from "components/movies-view/NoMovies";
+import MoviesContext from "MoviesContext";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -17,7 +15,9 @@ interface Props {
 }
 
 const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { movies } = useContext(MoviesContext);
+  const [sortedMovies, setSortedMovies] = useState(movies);
+
   const [filterTitle, setFilterTitle] = useState("");
 
   const [selectedMovies, setSelectedMovies] = useState<number[]>([]);
@@ -25,18 +25,9 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const moviesFilterHelper = movies.filter((movie) => {
+  const moviesFilterHelper = sortedMovies.filter((movie) => {
     return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
   });
-
-  useEffect(() => {
-    const getMovies = async (url: url) => {
-      const res = await api.get(url);
-      setMovies(res.data);
-    };
-
-    getMovies("/movies");
-  }, []);
 
   const moviesPerPage = 4;
   const indexOfLastMovie = currentPage * moviesPerPage;
@@ -50,13 +41,13 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
     <div>
       <h2>Lista Filmów</h2>
       <MoviesOptions
-        movies={movies}
-        setMovies={setMovies}
+        setSortedMovies={setSortedMovies}
         filterTitle={filterTitle}
         setFilterTitle={setFilterTitle}
         isSelecting={isSelecting}
         setIsSelecting={setIsSelecting}
         selectedMovies={selectedMovies}
+        setCurrentPage={setCurrentPage}
       />
       <hr />
       {moviesFilterHelper.length ? (
