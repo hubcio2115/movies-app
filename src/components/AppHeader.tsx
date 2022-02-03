@@ -1,7 +1,6 @@
 import { FC } from "react";
 
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 
 const AppHeader: FC = () => {
   return (
