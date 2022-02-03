@@ -1,6 +1,9 @@
 import { FC, useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { Rating, Typography } from "@mui/material";
+
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+
 import api from "api/movies";
 
 import Movie from "interfaces/Movie";

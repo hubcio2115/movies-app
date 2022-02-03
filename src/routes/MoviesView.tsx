@@ -1,5 +1,5 @@
 import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
-import { Pagination } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 import Movie from "interfaces/Movie";
 
