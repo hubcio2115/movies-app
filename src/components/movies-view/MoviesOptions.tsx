@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 import api from "api/movies";
+
 import MoviesContext from "MoviesContext";
 import Movie from "interfaces/Movie";
 

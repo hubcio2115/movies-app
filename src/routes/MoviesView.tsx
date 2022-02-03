@@ -1,5 +1,5 @@
 import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
-import { Pagination } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 import Movie from "interfaces/Movie";
 
@@ -8,6 +8,7 @@ import MoviesOptions from "components/movies-view/MoviesOptions";
 import MovieCard from "components/movies-view/MovieCard";
 import NoMovies from "components/movies-view/NoMovies";
 import MoviesContext from "MoviesContext";
+import { Container } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -38,7 +39,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   );
 
   return (
-    <div>
+    <Container>
       <h2>Lista Filmów</h2>
       <MoviesOptions
         setSortedMovies={setSortedMovies}
@@ -89,7 +90,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
         favoriteMovies={favoriteMovies}
         setFavoriteMovies={setFavoriteMovies}
       />
-    </div>
+    </Container>
   );
 };
 

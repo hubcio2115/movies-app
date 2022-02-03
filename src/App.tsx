@@ -7,7 +7,7 @@ import MoviesContext from "MoviesContext";
 import Movie from "./interfaces/Movie";
 import url from "types/url";
 
-import MyHeader from "components/MyHeader";
+import MyHeader from "components/AppHeader";
 import MoviesView from "routes/MoviesView";
 import MovieAddForm from "routes/MovieForm";
 import MovieDetails from "routes/MovieDetails";
