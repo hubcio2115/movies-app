@@ -10,6 +10,7 @@ import Movie from "interfaces/Movie";
 import url from "types/url";
 
 import MovieForm from "routes/MovieForm";
+import Container from "@mui/material/Container";
 
 const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<Movie>({} as Movie);
@@ -39,7 +40,7 @@ const MovieDetails: FC = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h2>Szczegóły filmu</h2>
       {isEditing ? (
         <button
@@ -102,7 +103,7 @@ const MovieDetails: FC = () => {
           </Typography>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

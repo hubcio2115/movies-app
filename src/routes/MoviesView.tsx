@@ -8,7 +8,8 @@ import MoviesOptions from "components/movies-view/MoviesOptions";
 import MovieCard from "components/movies-view/MovieCard";
 import NoMovies from "components/movies-view/NoMovies";
 import MoviesContext from "MoviesContext";
-import { Container } from "@mui/material";
+
+import Container from "@mui/material/Container";
 
 interface Props {
   favoriteMovies: Movie[];
