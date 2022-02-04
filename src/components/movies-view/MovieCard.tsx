@@ -1,7 +1,20 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Movie from "interfaces/Movie";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Checkbox,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import { Box } from "@mui/system";
+import { pink } from "@mui/material/colors";
 
 interface Props {
   movie: Movie;
@@ -24,6 +37,7 @@ const MovieCard: FC<Props> = ({
 }) => {
   const [checked, setChecked] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
+  const navigate = useNavigate();
 
   const handleCheckbox = () => {
     setChecked(!checked);
@@ -64,39 +78,72 @@ const MovieCard: FC<Props> = ({
   }, [favoriteMovies, movie]);
 
   return (
-    <div style={{ width: "300px" }}>
-      <Link to={`/movie-details/${movie.id}`}>
-        <img
-          src={movie.image_url}
-          alt="movie-poster"
-          width={220}
+    <Card sx={{ maxWidth: "600px" }}>
+      <Box sx={{ display: "flex", position: "relative" }}>
+        <CardMedia
+          component="img"
           height={330}
-        />
-        <p>{movie.title}</p>
-        <p>{movie.director}</p>
-        <p>{movie.genre}</p>
-        <p>{movie.year}</p>
-        <p>{movie.description}</p>
-      </Link>
-      {isSelecting ? (
-        <input
-          type="checkbox"
-          name="select"
-          id="select-checkbox"
-          checked={checked}
-          onChange={() => {
-            handleCheckbox();
+          image={movie.image_url}
+          alt="movie-poster"
+          onClick={() => {
+            if (isSelecting) {
+              handleCheckbox();
+            } else {
+              navigate(`/movie-details/${movie.id}`);
+            }
           }}
+          sx={{ cursor: "pointer", width: 210 }}
         />
-      ) : null}
-      <button
-        onClick={() => {
-          handleFavorite();
-        }}
-      >
-        {isFavorite ? "👎🏻" : "⭐️"}
-      </button>
-    </div>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          {isSelecting ? (
+            <Checkbox
+              name="select"
+              id="select-checkbox"
+              checked={checked}
+              onChange={() => {
+                handleCheckbox();
+              }}
+              sx={{ position: "absolute", right: 0 }}
+            />
+          ) : null}
+          <CardContent
+            onClick={() => {
+              if (isSelecting) {
+                handleCheckbox();
+              } else {
+                navigate(`/movie-details/${movie.id}`);
+              }
+            }}
+            sx={{
+              maxWidth: `(100% - ${550}px)`,
+              cursor: "pointer",
+              flexGrow: 1,
+            }}
+          >
+            <Typography variant="h6">{movie.title}</Typography>
+            <Typography variant="body1">Reżyser: {movie.director}</Typography>
+            <Typography variant="body1">Gatunek: {movie.genre}</Typography>
+            <Typography variant="body1">Rok premiery: {movie.year}</Typography>
+            <br />
+            <Typography variant="body2">{movie.description}</Typography>
+          </CardContent>
+          <CardActions>
+            <IconButton
+              aria-label="dodaj do ulubionych"
+              onClick={() => {
+                handleFavorite();
+              }}
+            >
+              {isFavorite ? (
+                <FavoriteIcon sx={{ color: pink[500] }} />
+              ) : (
+                <FavoriteBorder sx={{ color: pink[500] }} />
+              )}
+            </IconButton>
+          </CardActions>
+        </Box>
+      </Box>
+    </Card>
   );
 };
 
