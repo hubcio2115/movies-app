@@ -10,6 +10,7 @@ import NoMovies from "components/movies-view/NoMovies";
 import MoviesContext from "MoviesContext";
 
 import Container from "@mui/material/Container";
+import { Box } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -53,28 +54,38 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
       />
       <hr />
       {moviesFilterHelper.length ? (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-          {currentMovies
-            .filter((movie) => {
-              return (
-                movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !==
-                -1
-              );
-            })
-            .map((movie) => {
-              return (
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  isSelecting={isSelecting}
-                  selectedMovies={selectedMovies}
-                  setSelectedMovies={setSelectedMovies}
-                  favoriteMovies={favoriteMovies}
-                  setFavoriteMovies={setFavoriteMovies}
-                  isFavoriteProp={false}
-                />
-              );
-            })}
+        <>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: 2,
+            }}
+          >
+            {currentMovies
+              .filter((movie) => {
+                return (
+                  movie.title
+                    .toLowerCase()
+                    .indexOf(filterTitle.toLowerCase()) !== -1
+                );
+              })
+              .map((movie) => {
+                return (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    isSelecting={isSelecting}
+                    selectedMovies={selectedMovies}
+                    setSelectedMovies={setSelectedMovies}
+                    favoriteMovies={favoriteMovies}
+                    setFavoriteMovies={setFavoriteMovies}
+                    isFavoriteProp={false}
+                  />
+                );
+              })}
+          </Box>
+          <br />
           <Pagination
             count={Math.ceil(moviesFilterHelper.length / moviesPerPage)}
             page={currentPage}
@@ -82,7 +93,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
               setCurrentPage(v);
             }}
           />
-        </div>
+        </>
       ) : (
         <NoMovies />
       )}
