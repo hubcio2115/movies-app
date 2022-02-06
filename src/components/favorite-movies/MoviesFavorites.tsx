@@ -5,6 +5,7 @@ import Movie from "interfaces/Movie";
 import MovieCard from "components/movies-view/MovieCard";
 import NoFavoriteMovies from "components/favorite-movies/NoFavoriteMovies";
 import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -13,8 +14,10 @@ interface Props {
 
 const MoviesFavorites: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   return (
-    <Box sx={{ marginBottom: 5 }}>
-      <h1>Favorites</h1>
+    <Box sx={{ marginBottom: 5, marginTop: 3 }}>
+      <Typography variant="h4" mb={2}>
+        Favorites
+      </Typography>
       {favoriteMovies.length ? (
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
           {favoriteMovies.map((movie) => {
