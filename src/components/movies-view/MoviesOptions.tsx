@@ -19,6 +19,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Stack,
   TextField,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -79,7 +80,7 @@ const MoviesOptions: FC<Props> = ({
   };
 
   return (
-    <div style={{ display: "flex", gap: ".5rem" }}>
+    <Stack direction="row" spacing={2}>
       <Button
         variant="contained"
         color="success"
@@ -135,7 +136,7 @@ const MoviesOptions: FC<Props> = ({
           Zaznacz
         </Button>
       </Box>
-    </div>
+    </Stack>
   );
 };
 
