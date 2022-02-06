@@ -10,7 +10,7 @@ import NoMovies from "components/movies-view/NoMovies";
 import MoviesContext from "MoviesContext";
 
 import Container from "@mui/material/Container";
-import { Box, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -57,13 +57,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
       <hr />
       {moviesFilterHelper.length ? (
         <>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: 2,
-            }}
-          >
+          <Grid container spacing={2}>
             {currentMovies
               .filter((movie) => {
                 return (
@@ -86,9 +80,9 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
                   />
                 );
               })}
-          </Box>
+          </Grid>
           <br />
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Stack justifyContent="center">
             <Pagination
               sx={{ marginLeft: "auto", marginRight: "auto" }}
               count={Math.ceil(moviesFilterHelper.length / moviesPerPage)}
@@ -97,7 +91,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
                 setCurrentPage(v);
               }}
             />
-          </Box>
+          </Stack>
         </>
       ) : (
         <NoMovies />
