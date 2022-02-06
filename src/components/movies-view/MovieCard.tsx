@@ -37,6 +37,7 @@ const MovieCard: FC<Props> = ({
 }) => {
   const [checked, setChecked] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
+  const [favoriteHover, setFavoriteHover] = useState(false);
   const navigate = useNavigate();
 
   const handleCheckbox = () => {
@@ -76,6 +77,16 @@ const MovieCard: FC<Props> = ({
       setIsFavorite(true);
     }
   }, [favoriteMovies, movie]);
+
+  let buttonIcon = <FavoriteBorder sx={{ color: pink[500] }} />;
+
+  if (isFavorite && favoriteHover) {
+    buttonIcon = <FavoriteBorder sx={{ color: pink[500] }} />;
+  } else if (!isFavorite && favoriteHover) {
+    buttonIcon = <FavoriteIcon sx={{ color: pink[500] }} />;
+  } else if (isFavorite) {
+    buttonIcon = <FavoriteIcon sx={{ color: pink[500] }} />;
+  }
 
   return (
     <Card sx={{ maxWidth: "600px" }}>
@@ -133,12 +144,14 @@ const MovieCard: FC<Props> = ({
               onClick={() => {
                 handleFavorite();
               }}
+              onMouseEnter={() => {
+                setFavoriteHover(true);
+              }}
+              onMouseLeave={() => {
+                setFavoriteHover(false);
+              }}
             >
-              {isFavorite ? (
-                <FavoriteIcon sx={{ color: pink[500] }} />
-              ) : (
-                <FavoriteBorder sx={{ color: pink[500] }} />
-              )}
+              {buttonIcon}
             </IconButton>
           </CardActions>
         </Box>
