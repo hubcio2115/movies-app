@@ -13,7 +13,6 @@ import api from "api/movies";
 import MoviesContext from "MoviesContext";
 import Movie from "interfaces/Movie";
 import {
-  Box,
   Button,
   FormControl,
   InputLabel,

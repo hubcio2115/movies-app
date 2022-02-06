@@ -16,7 +16,7 @@ const MoviesFavorites: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   return (
     <Box sx={{ marginBottom: 5, marginTop: 3 }}>
       <Typography variant="h4" mb={2}>
-        Favorites
+        Ulubione
       </Typography>
       {favoriteMovies.length ? (
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
