@@ -5,7 +5,7 @@ import Movie from "interfaces/Movie";
 import MovieCard from "components/movies-view/MovieCard";
 import NoFavoriteMovies from "components/favorite-movies/NoFavoriteMovies";
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -19,7 +19,7 @@ const MoviesFavorites: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
         Ulubione
       </Typography>
       {favoriteMovies.length ? (
-        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
+        <Grid container>
           {favoriteMovies.map((movie) => {
             return (
               <MovieCard
@@ -31,7 +31,7 @@ const MoviesFavorites: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
               />
             );
           })}
-        </Box>
+        </Grid>
       ) : (
         <NoFavoriteMovies />
       )}
