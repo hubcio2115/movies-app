@@ -80,7 +80,7 @@ const MoviesOptions: FC<Props> = ({
   };
 
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" spacing={1}>
       <Button
         variant="contained"
         color="success"
@@ -114,7 +114,11 @@ const MoviesOptions: FC<Props> = ({
           setCurrentPage(1);
         }}
       />
-      <Box sx={{ display: "flex", gap: 1, marginLeft: "auto" }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{ marginLeft: "auto !important", justifySelf: "stretch" }}
+      >
         {!isSelecting ? null : (
           <Button
             color="error"
@@ -135,7 +139,7 @@ const MoviesOptions: FC<Props> = ({
         >
           Zaznacz
         </Button>
-      </Box>
+      </Stack>
     </Stack>
   );
 };
