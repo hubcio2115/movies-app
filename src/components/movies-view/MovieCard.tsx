@@ -8,6 +8,7 @@ import {
   CardContent,
   CardMedia,
   Checkbox,
+  Grid,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -89,35 +90,14 @@ const MovieCard: FC<Props> = ({
   }
 
   return (
-    <Card sx={{ maxWidth: "600px" }}>
-      <Box sx={{ display: "flex", position: "relative" }}>
-        <CardMedia
-          component="img"
-          height={330}
-          image={movie.image_url}
-          alt="movie-poster"
-          onClick={() => {
-            if (isSelecting) {
-              handleCheckbox();
-            } else {
-              navigate(`/movie-details/${movie.id}`);
-            }
-          }}
-          sx={{ cursor: "pointer", width: 210 }}
-        />
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          {isSelecting ? (
-            <Checkbox
-              name="select"
-              id="select-checkbox"
-              checked={checked}
-              onChange={() => {
-                handleCheckbox();
-              }}
-              sx={{ position: "absolute", right: 0 }}
-            />
-          ) : null}
-          <CardContent
+    <Grid item sm={12} md={6}>
+      <Card>
+        <Box sx={{ display: "flex", position: "relative" }}>
+          <CardMedia
+            component="img"
+            height={330}
+            image={movie.image_url}
+            alt="movie-poster"
             onClick={() => {
               if (isSelecting) {
                 handleCheckbox();
@@ -125,39 +105,62 @@ const MovieCard: FC<Props> = ({
                 navigate(`/movie-details/${movie.id}`);
               }
             }}
-            sx={{
-              maxWidth: `(100% - ${550}px)`,
-              cursor: "pointer",
-              flexGrow: 1,
-            }}
-          >
-            <Typography variant="h6">{movie.title}</Typography>
-            <Typography variant="body1">Reżyser: {movie.director}</Typography>
-            <Typography variant="body1">Gatunek: {movie.genre}</Typography>
-            <Typography variant="body1" mb={2}>
-              Rok premiery: {movie.year}
-            </Typography>
-            <Typography variant="body2">{movie.description}</Typography>
-          </CardContent>
-          <CardActions>
-            <IconButton
-              aria-label="dodaj do ulubionych"
+            sx={{ cursor: "pointer", width: 210 }}
+          />
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            {isSelecting ? (
+              <Checkbox
+                name="select"
+                id="select-checkbox"
+                checked={checked}
+                onChange={() => {
+                  handleCheckbox();
+                }}
+                sx={{ position: "absolute", right: 0 }}
+              />
+            ) : null}
+            <CardContent
               onClick={() => {
-                handleFavorite();
+                if (isSelecting) {
+                  handleCheckbox();
+                } else {
+                  navigate(`/movie-details/${movie.id}`);
+                }
               }}
-              onMouseEnter={() => {
-                setFavoriteHover(true);
-              }}
-              onMouseLeave={() => {
-                setFavoriteHover(false);
+              sx={{
+                maxWidth: `(100% - ${550}px)`,
+                cursor: "pointer",
+                flexGrow: 1,
               }}
             >
-              {buttonIcon}
-            </IconButton>
-          </CardActions>
+              <Typography variant="h6">{movie.title}</Typography>
+              <Typography variant="body1">Reżyser: {movie.director}</Typography>
+              <Typography variant="body1">Gatunek: {movie.genre}</Typography>
+              <Typography variant="body1" mb={2}>
+                Rok premiery: {movie.year}
+              </Typography>
+              <Typography variant="body2">{movie.description}</Typography>
+            </CardContent>
+            <CardActions>
+              <IconButton
+                aria-label="dodaj do ulubionych"
+                onClick={() => {
+                  handleFavorite();
+                }}
+                onMouseEnter={() => {
+                  setFavoriteHover(true);
+                }}
+                onMouseLeave={() => {
+                  setFavoriteHover(false);
+                }}
+              >
+                {buttonIcon}
+              </IconButton>
+            </CardActions>
+          </Box>
         </Box>
-      </Box>
-    </Card>
+      </Card>
+    </Grid>
   );
 };
 
