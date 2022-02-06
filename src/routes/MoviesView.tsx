@@ -10,7 +10,7 @@ import NoMovies from "components/movies-view/NoMovies";
 import MoviesContext from "MoviesContext";
 
 import Container from "@mui/material/Container";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -42,7 +42,9 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
 
   return (
     <Container>
-      <h2>Lista Filmów</h2>
+      <Typography variant="h4" mt={3} mb={3}>
+        Lista Filmów
+      </Typography>
       <MoviesOptions
         setSortedMovies={setSortedMovies}
         filterTitle={filterTitle}
@@ -86,13 +88,16 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
               })}
           </Box>
           <br />
-          <Pagination
-            count={Math.ceil(moviesFilterHelper.length / moviesPerPage)}
-            page={currentPage}
-            onChange={(e, v) => {
-              setCurrentPage(v);
-            }}
-          />
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Pagination
+              sx={{ marginLeft: "auto", marginRight: "auto" }}
+              count={Math.ceil(moviesFilterHelper.length / moviesPerPage)}
+              page={currentPage}
+              onChange={(e, v) => {
+                setCurrentPage(v);
+              }}
+            />
+          </Box>
         </>
       ) : (
         <NoMovies />

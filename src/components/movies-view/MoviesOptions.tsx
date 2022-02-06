@@ -6,12 +6,23 @@ import {
   SetStateAction,
   useContext,
 } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import api from "api/movies";
 
 import MoviesContext from "MoviesContext";
 import Movie from "interfaces/Movie";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
@@ -36,6 +47,7 @@ const MoviesOptions: FC<Props> = ({
 }) => {
   const { movies, setMovies } = useContext(MoviesContext);
   const [sortType, setSortType] = useState<SortType | "">("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sortMovies = (type: SortType) => {
@@ -67,24 +79,32 @@ const MoviesOptions: FC<Props> = ({
   };
 
   return (
-    <div>
-      <Link to={"/add-form"}>
-        <button>Dodaj Film</button>
-      </Link>
-      <select
-        name="category"
-        id="category"
-        value={sortType}
-        onChange={(e) => setSortType(e.target.value as SortType)}
+    <div style={{ display: "flex", gap: ".5rem" }}>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={() => {
+          navigate("/add-form");
+        }}
+        startIcon={<AddIcon />}
       >
-        <option value="" disabled>
-          Sortuj wg.
-        </option>
-        <option value="title">Tytuł</option>
-        <option value="genre">Gatunek</option>
-        <option value="year">Rok</option>
-      </select>
-      <input
+        Dodaj Film
+      </Button>
+      <FormControl sx={{ minWidth: 120 }}>
+        <InputLabel id="category-select-label">Sortuj wg.</InputLabel>
+        <Select
+          labelId="category-select-label"
+          id="category-select"
+          label="category"
+          value={sortType}
+          onChange={(e) => setSortType(e.target.value as SortType)}
+        >
+          <MenuItem value="title">Tytuł</MenuItem>
+          <MenuItem value="genre">Gatunek</MenuItem>
+          <MenuItem value="year">Rok</MenuItem>
+        </Select>
+      </FormControl>
+      <TextField
         type="text"
         placeholder="Wyszukaj film..."
         value={filterTitle}
@@ -93,22 +113,28 @@ const MoviesOptions: FC<Props> = ({
           setCurrentPage(1);
         }}
       />
-      <button
-        onClick={() => {
-          setIsSelecting(!isSelecting);
-        }}
-      >
-        Zaznacz
-      </button>
-      {!isSelecting ? null : (
-        <button
+      <Box sx={{ display: "flex", gap: 1, marginLeft: "auto" }}>
+        {!isSelecting ? null : (
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() => {
+              handleDeleteMovie();
+            }}
+            disabled={selectedMovies.length === 0}
+          >
+            <DeleteIcon />
+          </Button>
+        )}
+        <Button
+          variant="contained"
           onClick={() => {
-            handleDeleteMovie();
+            setIsSelecting(!isSelecting);
           }}
         >
-          ❌
-        </button>
-      )}
+          Zaznacz
+        </Button>
+      </Box>
     </div>
   );
 };
