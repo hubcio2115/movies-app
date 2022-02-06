@@ -134,8 +134,9 @@ const MovieCard: FC<Props> = ({
             <Typography variant="h6">{movie.title}</Typography>
             <Typography variant="body1">Reżyser: {movie.director}</Typography>
             <Typography variant="body1">Gatunek: {movie.genre}</Typography>
-            <Typography variant="body1">Rok premiery: {movie.year}</Typography>
-            <br />
+            <Typography variant="body1" mb={2}>
+              Rok premiery: {movie.year}
+            </Typography>
             <Typography variant="body2">{movie.description}</Typography>
           </CardContent>
           <CardActions>
