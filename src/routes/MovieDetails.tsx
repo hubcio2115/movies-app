@@ -11,6 +11,10 @@ import url from "types/url";
 
 import MovieForm from "routes/MovieForm";
 import Container from "@mui/material/Container";
+import { Button, Grid, Stack } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EditIcon from "@mui/icons-material/Edit";
+import Delete from "@mui/icons-material/Delete";
 
 const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<Movie>({} as Movie);
@@ -40,37 +44,10 @@ const MovieDetails: FC = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h5" mt={2} mb={2}>
+    <Container sx={{ mb: 5 }}>
+      <Typography variant="h5" mt={2} mb={3}>
         Szczegóły filmu
       </Typography>
-      {!isEditing ? (
-        <>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Powrót
-          </button>
-          <button
-            onClick={() => {
-              setIsEditing(!isEditing);
-            }}
-          >
-            Edytuj
-          </button>
-        </>
-      ) : null}
-      {isEditing ? null : (
-        <button
-          onClick={() => {
-            handleDeleteMovie();
-          }}
-        >
-          ❌
-        </button>
-      )}
       {isEditing ? (
         <MovieForm
           isAddForm={false}
@@ -81,28 +58,80 @@ const MovieDetails: FC = () => {
           setMovie={setMovie}
         />
       ) : (
-        <div style={{ width: "300px" }}>
-          <img
-            src={movie.image_url}
-            alt="movie-poster"
-            width={220}
-            height={330}
-          />
-          <p>{movie.title}</p>
-          <p>{movie.director}</p>
-          <p>{movie.genre}</p>
-          <p>{movie.year}</p>
-          <p>{movie.description}</p>
-          <Typography component="legend">
-            <Rating
-              name="controlled"
-              defaultValue={movie.rating}
-              value={rating}
-              onChange={(e, v) => handleRating(v as number)}
+        <Grid container mb={5} spacing={2}>
+          <Grid item xs={12} sm={4} md={3}>
+            <img
+              src={movie.image_url}
+              alt="movie-poster"
+              width={220}
+              height={330}
             />
-          </Typography>
-        </div>
+          </Grid>
+          <Grid item xs={10} sm={7}>
+            <Grid container ml={2} spacing={1}>
+              <Grid item xs={12}>
+                <Typography variant="h6">{movie.title}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1">
+                  Reżyser: {movie.director}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1">Gatunek: {movie.genre}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1">Rok: {movie.year}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1">{movie.description}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography component="legend" textAlign="center">
+                  <Rating
+                    name="controlled"
+                    defaultValue={movie.rating}
+                    value={rating}
+                    onChange={(e, v) => handleRating(v as number)}
+                  />
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       )}
+      {!isEditing ? (
+        <Stack direction="row" gap={1}>
+          <Button
+            variant="contained"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Powrót
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<EditIcon />}
+            onClick={() => {
+              setIsEditing(!isEditing);
+            }}
+          >
+            Edytuj
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              handleDeleteMovie();
+            }}
+          >
+            <Delete />
+          </Button>
+        </Stack>
+      ) : null}
     </Container>
   );
 };
