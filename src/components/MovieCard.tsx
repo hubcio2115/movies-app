@@ -110,7 +110,7 @@ const MovieCard: FC<Props> = ({
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Stack>
+            <Stack sx={{ height: "100%" }}>
               {isSelecting ? (
                 <Checkbox
                   name="select"
