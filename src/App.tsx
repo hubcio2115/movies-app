@@ -31,7 +31,7 @@ const App: FC = () => {
   );
 
   return (
-    <div>
+    <>
       <MyHeader />
       <MoviesContext.Provider value={providerMovies}>
         <Routes>
@@ -48,7 +48,7 @@ const App: FC = () => {
           <Route path="/movie-details/:movieId" element={<MovieDetails />} />
         </Routes>
       </MoviesContext.Provider>
-    </div>
+    </>
   );
 };
 

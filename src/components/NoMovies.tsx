@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Box, Typography } from "@mui/material";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 interface Props {
   isFavorites?: boolean;
