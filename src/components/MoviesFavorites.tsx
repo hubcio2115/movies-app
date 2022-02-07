@@ -2,10 +2,10 @@ import { Dispatch, FC, SetStateAction } from "react";
 
 import Movie from "interfaces/Movie";
 
-import MovieCard from "components/movies-view/MovieCard";
-import NoFavoriteMovies from "components/favorite-movies/NoFavoriteMovies";
+import MovieCard from "components/MovieCard";
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
+import NoMovies from "components/NoMovies";
 
 interface Props {
   favoriteMovies: Movie[];
@@ -33,7 +33,7 @@ const MoviesFavorites: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
           })}
         </Grid>
       ) : (
-        <NoFavoriteMovies />
+        <NoMovies isFavorites />
       )}
     </Box>
   );

@@ -3,10 +3,10 @@ import Pagination from "@mui/material/Pagination";
 
 import Movie from "interfaces/Movie";
 
-import MoviesFavorites from "components/favorite-movies/MoviesFavorites";
-import MoviesOptions from "components/movies-view/MoviesOptions";
-import MovieCard from "components/movies-view/MovieCard";
-import NoMovies from "components/movies-view/NoMovies";
+import MoviesFavorites from "components/MoviesFavorites";
+import MoviesOptions from "components/MoviesOptions";
+import MovieCard from "components/MovieCard";
+import NoMovies from "components/NoMovies";
 import MoviesContext from "MoviesContext";
 
 import Container from "@mui/material/Container";
