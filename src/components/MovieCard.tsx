@@ -110,7 +110,7 @@ const MovieCard: FC<Props> = ({
               sx={{ cursor: "pointer" }}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={7}>
             <Stack sx={{ height: "100%" }}>
               {isSelecting ? (
                 <Checkbox
@@ -145,7 +145,9 @@ const MovieCard: FC<Props> = ({
                 <Typography variant="body1" mb={2}>
                   Rok premiery: {movie.year}
                 </Typography>
-                <Typography variant="body2">{movie.description}</Typography>
+                <Typography variant="body2">
+                  {movie.description.substring(0, 110) + "..."}
+                </Typography>
               </CardContent>
               <CardActions>
                 <IconButton
