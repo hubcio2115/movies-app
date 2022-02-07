@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
@@ -41,27 +41,27 @@ const MovieDetails: FC = () => {
 
   return (
     <Container>
-      <h2>Szczegóły filmu</h2>
-      {isEditing ? (
-        <button
-          onClick={() => {
-            setIsEditing(!isEditing);
-          }}
-        >
-          Powrót
-        </button>
-      ) : (
-        <Link to={"/"}>
-          <button>Powrót</button>
-        </Link>
-      )}
-      <button
-        onClick={() => {
-          setIsEditing(!isEditing);
-        }}
-      >
-        Edytuj
-      </button>
+      <Typography variant="h5" mt={2} mb={2}>
+        Szczegóły filmu
+      </Typography>
+      {!isEditing ? (
+        <>
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Powrót
+          </button>
+          <button
+            onClick={() => {
+              setIsEditing(!isEditing);
+            }}
+          >
+            Edytuj
+          </button>
+        </>
+      ) : null}
       {isEditing ? null : (
         <button
           onClick={() => {

@@ -80,18 +80,7 @@ const MovieForm: FC<Props> = ({
       <Stack gap={3} mt={2}>
         {isAddForm ? (
           <Box>
-            <Typography variant="h5" mb={2}>
-              Dodaj Film
-            </Typography>
-            <Button
-              variant="contained"
-              startIcon={<ArrowBackIcon />}
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              Powrót
-            </Button>
+            <Typography variant="h5">Dodaj Film</Typography>
           </Box>
         ) : null}
         <form onSubmit={formik.handleSubmit}>
@@ -212,14 +201,29 @@ const MovieForm: FC<Props> = ({
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            color="success"
-            startIcon={<SaveIcon />}
-          >
-            Zapisz
-          </Button>
+          <Stack direction="row" justifyContent="space-between">
+            <Button
+              variant="contained"
+              startIcon={<ArrowBackIcon />}
+              onClick={() => {
+                if (isAddForm) {
+                  navigate("/");
+                } else {
+                  setIsEditing(false);
+                }
+              }}
+            >
+              Powrót
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              startIcon={<SaveIcon />}
+            >
+              Zapisz
+            </Button>
+          </Stack>
         </form>
       </Stack>
     </Container>

@@ -15,6 +15,7 @@ import Movie from "interfaces/Movie";
 import {
   Button,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -79,67 +80,83 @@ const MoviesOptions: FC<Props> = ({
   };
 
   return (
-    <Stack direction="row" spacing={1}>
-      <Button
-        variant="contained"
-        color="success"
-        onClick={() => {
-          navigate("/add-form");
-        }}
-        startIcon={<AddIcon />}
-      >
-        Dodaj Film
-      </Button>
-      <FormControl sx={{ minWidth: 120 }}>
-        <InputLabel id="category-select-label">Sortuj wg.</InputLabel>
-        <Select
-          labelId="category-select-label"
-          id="category-select"
-          label="category"
-          value={sortType}
-          onChange={(e) => setSortType(e.target.value as SortType)}
-        >
-          <MenuItem value="title">Tytuł</MenuItem>
-          <MenuItem value="genre">Gatunek</MenuItem>
-          <MenuItem value="year">Rok</MenuItem>
-        </Select>
-      </FormControl>
-      <TextField
-        type="text"
-        placeholder="Wyszukaj film..."
-        value={filterTitle}
-        onChange={(e) => {
-          setFilterTitle(e.target.value);
-          setCurrentPage(1);
-        }}
-      />
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{ marginLeft: "auto !important", justifySelf: "stretch" }}
-      >
-        {!isSelecting ? null : (
-          <Button
-            color="error"
-            variant="contained"
-            onClick={() => {
-              handleDeleteMovie();
-            }}
-            disabled={selectedMovies.length === 0}
-          >
-            <DeleteIcon />
-          </Button>
-        )}
+    <Grid
+      container
+      spacing={1}
+      columns={{ xs: 4, sm: 12, md: 12, lg: 12, xl: 12 }}
+    >
+      <Grid item xs={2} sm={3} md={2}>
         <Button
           variant="contained"
+          color="success"
+          fullWidth
           onClick={() => {
-            setIsSelecting(!isSelecting);
+            navigate("/add-form");
           }}
+          startIcon={<AddIcon />}
+          sx={{ height: "100%" }}
         >
-          Zaznacz
+          Dodaj Film
         </Button>
-      </Stack>
-    </Stack>
+      </Grid>
+      <Grid item xs={2} sm={2}>
+        <FormControl fullWidth>
+          <InputLabel id="category-select-label">Sortuj wg.</InputLabel>
+          <Select
+            labelId="category-select-label"
+            id="category-select"
+            label="category"
+            value={sortType}
+            onChange={(e) => setSortType(e.target.value as SortType)}
+          >
+            <MenuItem value="title">Tytuł</MenuItem>
+            <MenuItem value="genre">Gatunek</MenuItem>
+            <MenuItem value="year">Rok</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={4} sm={3}>
+        <TextField
+          type="text"
+          placeholder="Wyszukaj film..."
+          value={filterTitle}
+          fullWidth
+          onChange={(e) => {
+            setFilterTitle(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
+      </Grid>
+      <Grid item xs={4} md={5}>
+        <Stack
+          direction="row"
+          spacing={1}
+          height="56px"
+          justifyContent="flex-end"
+        >
+          {!isSelecting ? null : (
+            <Button
+              color="error"
+              variant="contained"
+              onClick={() => {
+                handleDeleteMovie();
+              }}
+              disabled={selectedMovies.length === 0}
+            >
+              <DeleteIcon />
+            </Button>
+          )}
+          <Button
+            variant="contained"
+            onClick={() => {
+              setIsSelecting(!isSelecting);
+            }}
+          >
+            Zaznacz
+          </Button>
+        </Stack>
+      </Grid>
+    </Grid>
   );
 };
 
