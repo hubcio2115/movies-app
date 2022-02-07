@@ -92,34 +92,13 @@ const MovieCard: FC<Props> = ({
   return (
     <Grid item sm={12} md={6}>
       <Card>
-        <Stack direction="row" sx={{ position: "relative" }}>
-          <CardMedia
-            component="img"
-            height={330}
-            image={movie.image_url}
-            alt="movie-poster"
-            onClick={() => {
-              if (isSelecting) {
-                handleCheckbox();
-              } else {
-                navigate(`/movie-details/${movie.id}`);
-              }
-            }}
-            sx={{ cursor: "pointer", width: 210 }}
-          />
-          <Stack>
-            {isSelecting ? (
-              <Checkbox
-                name="select"
-                id="select-checkbox"
-                checked={checked}
-                onChange={() => {
-                  handleCheckbox();
-                }}
-                sx={{ position: "absolute", right: 0 }}
-              />
-            ) : null}
-            <CardContent
+        <Grid container spacing={1} sx={{ position: "relative" }}>
+          <Grid item xs={12} sm={5}>
+            <CardMedia
+              component="img"
+              height={330}
+              image={movie.image_url}
+              alt="movie-poster"
               onClick={() => {
                 if (isSelecting) {
                   handleCheckbox();
@@ -127,38 +106,65 @@ const MovieCard: FC<Props> = ({
                   navigate(`/movie-details/${movie.id}`);
                 }
               }}
-              sx={{
-                maxWidth: `(100% - ${550}px)`,
-                cursor: "pointer",
-                flexGrow: 1,
-              }}
-            >
-              <Typography variant="h6">{movie.title}</Typography>
-              <Typography variant="body1">Reżyser: {movie.director}</Typography>
-              <Typography variant="body1">Gatunek: {movie.genre}</Typography>
-              <Typography variant="body1" mb={2}>
-                Rok premiery: {movie.year}
-              </Typography>
-              <Typography variant="body2">{movie.description}</Typography>
-            </CardContent>
-            <CardActions>
-              <IconButton
-                aria-label="dodaj do ulubionych"
+              sx={{ cursor: "pointer" }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Stack>
+              {isSelecting ? (
+                <Checkbox
+                  name="select"
+                  id="select-checkbox"
+                  checked={checked}
+                  onChange={() => {
+                    handleCheckbox();
+                  }}
+                  sx={{ position: "absolute", right: 0 }}
+                />
+              ) : null}
+              <CardContent
                 onClick={() => {
-                  handleFavorite();
+                  if (isSelecting) {
+                    handleCheckbox();
+                  } else {
+                    navigate(`/movie-details/${movie.id}`);
+                  }
                 }}
-                onMouseEnter={() => {
-                  setFavoriteHover(true);
-                }}
-                onMouseLeave={() => {
-                  setFavoriteHover(false);
+                sx={{
+                  maxWidth: `(100% - ${550}px)`,
+                  cursor: "pointer",
+                  flexGrow: 1,
                 }}
               >
-                {buttonIcon}
-              </IconButton>
-            </CardActions>
-          </Stack>
-        </Stack>
+                <Typography variant="h6">{movie.title}</Typography>
+                <Typography variant="body1">
+                  Reżyser: {movie.director}
+                </Typography>
+                <Typography variant="body1">Gatunek: {movie.genre}</Typography>
+                <Typography variant="body1" mb={2}>
+                  Rok premiery: {movie.year}
+                </Typography>
+                <Typography variant="body2">{movie.description}</Typography>
+              </CardContent>
+              <CardActions>
+                <IconButton
+                  aria-label="dodaj do ulubionych"
+                  onClick={() => {
+                    handleFavorite();
+                  }}
+                  onMouseEnter={() => {
+                    setFavoriteHover(true);
+                  }}
+                  onMouseLeave={() => {
+                    setFavoriteHover(false);
+                  }}
+                >
+                  {buttonIcon}
+                </IconButton>
+              </CardActions>
+            </Stack>
+          </Grid>
+        </Grid>
       </Card>
     </Grid>
   );
