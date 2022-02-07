@@ -1,11 +1,12 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import api from "api/movies";
 
 import Movie from "interfaces/Movie";
+
 import {
   Button,
   Container,
@@ -15,8 +16,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import SaveIcon from "@mui/icons-material/Save";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+import { Save, ArrowBack } from "@mui/icons-material";
 
 interface Props {
   isAddForm: boolean;
@@ -204,7 +205,7 @@ const MovieForm: FC<Props> = ({
           <Stack direction="row" justifyContent="space-between">
             <Button
               variant="contained"
-              startIcon={<ArrowBackIcon />}
+              startIcon={<ArrowBack />}
               onClick={() => {
                 if (isAddForm) {
                   navigate("/");
@@ -219,7 +220,7 @@ const MovieForm: FC<Props> = ({
               type="submit"
               variant="contained"
               color="success"
-              startIcon={<SaveIcon />}
+              startIcon={<Save />}
             >
               Zapisz
             </Button>

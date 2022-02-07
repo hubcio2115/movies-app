@@ -12,6 +12,7 @@ import api from "api/movies";
 
 import MoviesContext from "MoviesContext";
 import Movie from "interfaces/Movie";
+
 import {
   Button,
   FormControl,
@@ -22,8 +23,8 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+
+import { Add, Delete } from "@mui/icons-material";
 
 interface Props {
   setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
@@ -93,7 +94,7 @@ const MoviesOptions: FC<Props> = ({
           onClick={() => {
             navigate("/add-form");
           }}
-          startIcon={<AddIcon />}
+          startIcon={<Add />}
           sx={{ height: "100%" }}
         >
           Dodaj Film
@@ -143,7 +144,7 @@ const MoviesOptions: FC<Props> = ({
               }}
               disabled={selectedMovies.length === 0}
             >
-              <DeleteIcon />
+              <Delete />
             </Button>
           )}
           <Button

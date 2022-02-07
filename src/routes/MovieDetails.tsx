@@ -1,20 +1,23 @@
 import { FC, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
-
 import api from "api/movies";
 
 import Movie from "interfaces/Movie";
 import url from "types/url";
 
 import MovieForm from "routes/MovieForm";
-import Container from "@mui/material/Container";
-import { Button, Grid, Stack } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import EditIcon from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
+
+import {
+  Button,
+  Grid,
+  Stack,
+  Container,
+  Rating,
+  Typography,
+} from "@mui/material";
+
+import { ArrowBack, Edit, Delete } from "@mui/icons-material";
 
 const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<Movie>({} as Movie);
@@ -112,7 +115,7 @@ const MovieDetails: FC = () => {
         <Stack direction="row" gap={1}>
           <Button
             variant="contained"
-            startIcon={<ArrowBackIcon />}
+            startIcon={<ArrowBack />}
             onClick={() => {
               navigate("/");
             }}
@@ -122,7 +125,7 @@ const MovieDetails: FC = () => {
           <Button
             variant="contained"
             color="secondary"
-            startIcon={<EditIcon />}
+            startIcon={<Edit />}
             onClick={() => {
               setIsEditing(!isEditing);
             }}

@@ -13,8 +13,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { pink } from "@mui/material/colors";
 
 interface Props {
@@ -84,9 +84,9 @@ const MovieCard: FC<Props> = ({
   if (isFavorite && favoriteHover) {
     buttonIcon = <FavoriteBorder sx={{ color: pink[500] }} />;
   } else if (!isFavorite && favoriteHover) {
-    buttonIcon = <FavoriteIcon sx={{ color: pink[500] }} />;
+    buttonIcon = <Favorite sx={{ color: pink[500] }} />;
   } else if (isFavorite) {
-    buttonIcon = <FavoriteIcon sx={{ color: pink[500] }} />;
+    buttonIcon = <Favorite sx={{ color: pink[500] }} />;
   }
 
   return (

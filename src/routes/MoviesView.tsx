@@ -1,5 +1,4 @@
 import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
-import Pagination from "@mui/material/Pagination";
 
 import Movie from "interfaces/Movie";
 
@@ -9,8 +8,7 @@ import MovieCard from "components/MovieCard";
 import NoMovies from "components/NoMovies";
 import MoviesContext from "MoviesContext";
 
-import Container from "@mui/material/Container";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Pagination, Container, Grid, Stack, Typography } from "@mui/material";
 
 interface Props {
   favoriteMovies: Movie[];
