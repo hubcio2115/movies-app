@@ -64,12 +64,14 @@ const MovieForm: FC<Props> = ({
         api.post("/movie", values);
       } else {
         api.put(`/movie/${initialValues.id}`, values);
+
         setMovie({
           id: initialValues.id,
           ...values,
           rating: initialValues.rating as number,
           rating_count: initialValues.rating_count as number,
         } as Movie);
+
         setIsEditing(false);
       }
     },
@@ -107,7 +109,6 @@ const MovieForm: FC<Props> = ({
               <TextField
                 id="director"
                 name="director"
-                type="text"
                 label="Reżyser"
                 value={formik.values.director}
                 onChange={formik.handleChange}
@@ -127,7 +128,6 @@ const MovieForm: FC<Props> = ({
               <TextField
                 id="genre"
                 name="genre"
-                type="text"
                 label="Gatunek"
                 value={formik.values.genre}
                 onChange={formik.handleChange}
@@ -145,8 +145,8 @@ const MovieForm: FC<Props> = ({
               <TextField
                 id="year"
                 name="year"
-                type="number"
                 label="Rok"
+                type="number"
                 value={formik.values.year}
                 onChange={formik.handleChange}
                 onBlur={(e) => {

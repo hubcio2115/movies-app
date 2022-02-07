@@ -5,7 +5,6 @@ import api from "api/movies";
 import MoviesContext from "MoviesContext";
 
 import Movie from "./interfaces/Movie";
-import url from "types/url";
 
 import MyHeader from "components/AppHeader";
 import MoviesView from "routes/MoviesView";
@@ -17,7 +16,7 @@ const App: FC = () => {
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const getMovies = async (url: url) => {
+    const getMovies = async (url: string) => {
       const res = await api.get(url);
       setMovies(res.data);
     };

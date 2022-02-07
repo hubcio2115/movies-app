@@ -28,8 +28,8 @@ import { Add, Delete } from "@mui/icons-material";
 
 interface Props {
   setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
-  filterTitle: string;
-  setFilterTitle: Dispatch<SetStateAction<string>>;
+  titleFilter: string;
+  setTitleFilter: Dispatch<SetStateAction<string>>;
   isSelecting: boolean;
   setIsSelecting: Dispatch<SetStateAction<boolean>>;
   selectedMovies: number[];
@@ -40,8 +40,8 @@ type SortType = "title" | "genre" | "year";
 
 const MoviesOptions: FC<Props> = ({
   setSortedMovies,
-  filterTitle,
-  setFilterTitle,
+  titleFilter,
+  setTitleFilter,
   isSelecting,
   setIsSelecting,
   selectedMovies,
@@ -72,11 +72,11 @@ const MoviesOptions: FC<Props> = ({
     selectedMovies.forEach((movieId) => {
       api.delete(`/movie/${movieId}`);
 
-      const temp = [...movies].filter((movie) => {
+      const newMovies = [...movies].filter((movie) => {
         return movie.id !== movieId;
       });
 
-      setMovies(temp);
+      setMovies(newMovies);
     });
   };
 
@@ -120,10 +120,10 @@ const MoviesOptions: FC<Props> = ({
         <TextField
           type="text"
           placeholder="Wyszukaj film..."
-          value={filterTitle}
+          value={titleFilter}
           fullWidth
           onChange={(e) => {
-            setFilterTitle(e.target.value);
+            setTitleFilter(e.target.value);
             setCurrentPage(1);
           }}
         />

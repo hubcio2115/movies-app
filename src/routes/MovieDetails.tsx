@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "api/movies";
 
 import Movie from "interfaces/Movie";
-import url from "types/url";
 
 import MovieForm from "routes/MovieForm";
 
@@ -27,7 +26,7 @@ const MovieDetails: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getMovie = async (url: url) => {
+    const getMovie = async (url: string) => {
       const res = await api.get(url);
       setMovie(res.data);
       setRating(movie.rating);

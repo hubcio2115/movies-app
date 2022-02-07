@@ -19,7 +19,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const { movies } = useContext(MoviesContext);
   const [sortedMovies, setSortedMovies] = useState(movies);
 
-  const [filterTitle, setFilterTitle] = useState("");
+  const [titleFilter, setTitleFilter] = useState("");
 
   const [selectedMovies, setSelectedMovies] = useState<number[]>([]);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -27,7 +27,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const moviesFilterHelper = sortedMovies.filter((movie) => {
-    return movie.title.toLowerCase().indexOf(filterTitle.toLowerCase()) !== -1;
+    return movie.title.toLowerCase().indexOf(titleFilter.toLowerCase()) !== -1;
   });
 
   const moviesPerPage = 4;
@@ -45,8 +45,8 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
       </Typography>
       <MoviesOptions
         setSortedMovies={setSortedMovies}
-        filterTitle={filterTitle}
-        setFilterTitle={setFilterTitle}
+        titleFilter={titleFilter}
+        setTitleFilter={setTitleFilter}
         isSelecting={isSelecting}
         setIsSelecting={setIsSelecting}
         selectedMovies={selectedMovies}
@@ -61,7 +61,7 @@ const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
                 return (
                   movie.title
                     .toLowerCase()
-                    .indexOf(filterTitle.toLowerCase()) !== -1
+                    .indexOf(titleFilter.toLowerCase()) !== -1
                 );
               })
               .map((movie) => {

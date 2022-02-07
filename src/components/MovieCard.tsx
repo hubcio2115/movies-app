@@ -39,6 +39,7 @@ const MovieCard: FC<Props> = ({
   const [checked, setChecked] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
   const [favoriteHover, setFavoriteHover] = useState(false);
+
   const navigate = useNavigate();
 
   const handleCheckbox = () => {
