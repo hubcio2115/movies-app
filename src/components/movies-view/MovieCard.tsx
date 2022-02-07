@@ -10,11 +10,11 @@ import {
   Checkbox,
   Grid,
   IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { Box } from "@mui/system";
 import { pink } from "@mui/material/colors";
 
 interface Props {
@@ -92,7 +92,7 @@ const MovieCard: FC<Props> = ({
   return (
     <Grid item sm={12} md={6}>
       <Card>
-        <Box sx={{ display: "flex", position: "relative" }}>
+        <Stack direction="row" sx={{ position: "relative" }}>
           <CardMedia
             component="img"
             height={330}
@@ -107,7 +107,7 @@ const MovieCard: FC<Props> = ({
             }}
             sx={{ cursor: "pointer", width: 210 }}
           />
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Stack>
             {isSelecting ? (
               <Checkbox
                 name="select"
@@ -157,8 +157,8 @@ const MovieCard: FC<Props> = ({
                 {buttonIcon}
               </IconButton>
             </CardActions>
-          </Box>
-        </Box>
+          </Stack>
+        </Stack>
       </Card>
     </Grid>
   );
