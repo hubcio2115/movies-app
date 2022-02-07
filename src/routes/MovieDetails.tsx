@@ -59,7 +59,15 @@ const MovieDetails: FC = () => {
         />
       ) : (
         <Grid container mb={5} spacing={2}>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={3}
+            p={0}
+            m={0}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <img
               src={movie.image_url}
               alt="movie-poster"
