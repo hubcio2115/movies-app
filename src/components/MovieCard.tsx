@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Movie from "interfaces/Movie";
+import Movie from "../interfaces/Movie";
 import {
   Card,
   CardActions,
