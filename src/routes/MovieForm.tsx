@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import api from "api/movies";
+import api from "../api/movies";
 
-import Movie from "interfaces/Movie";
+import Movie from "../interfaces/Movie";
 
 import {
   Button,

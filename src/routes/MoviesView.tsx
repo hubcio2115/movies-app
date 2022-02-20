@@ -1,12 +1,12 @@
 import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
 
-import Movie from "interfaces/Movie";
+import Movie from "../interfaces/Movie";
 
-import MoviesFavorites from "components/MoviesFavorites";
-import MoviesOptions from "components/MoviesOptions";
-import MovieCard from "components/MovieCard";
-import NoMovies from "components/NoMovies";
-import MoviesContext from "MoviesContext";
+import MoviesFavorites from "../components/MoviesFavorites";
+import MoviesOptions from "../components/MoviesOptions";
+import MovieCard from "../components/MovieCard";
+import NoMovies from "../components/NoMovies";
+import MoviesContext from "../MoviesContext";
 
 import { Pagination, Container, Grid, Stack, Typography } from "@mui/material";
 
@@ -17,7 +17,7 @@ interface Props {
 
 const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
   const { movies } = useContext(MoviesContext);
-  const [sortedMovies, setSortedMovies] = useState(movies);
+  const [sortedMovies, setSortedMovies] = useState<Movie[]>(movies);
 
   const [titleFilter, setTitleFilter] = useState("");
 
