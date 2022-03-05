@@ -17,7 +17,7 @@ import {
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { pink } from "@mui/material/colors";
 
-interface Props {
+interface MovieCardProps {
   movie: Movie;
   isSelecting?: boolean;
   selectedMovies?: number[];
@@ -27,7 +27,7 @@ interface Props {
   isFavoriteProp: boolean;
 }
 
-const MovieCard: FC<Props> = ({
+const MovieCard: FC<MovieCardProps> = ({
   movie,
   isSelecting,
   selectedMovies = [],

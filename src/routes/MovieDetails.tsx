@@ -5,7 +5,7 @@ import api from "../api/movies";
 
 import Movie from "../interfaces/Movie";
 
-import MovieForm from "../routes/MovieForm";
+import MovieForm from "./MovieForm";
 
 import {
   Button,

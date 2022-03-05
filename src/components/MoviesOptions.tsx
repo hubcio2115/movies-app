@@ -26,7 +26,7 @@ import {
 
 import { Add, Delete } from "@mui/icons-material";
 
-interface Props {
+interface MovieOptionsProps {
   setSortedMovies: Dispatch<SetStateAction<Movie[]>>;
   titleFilter: string;
   setTitleFilter: Dispatch<SetStateAction<string>>;
@@ -38,7 +38,7 @@ interface Props {
 
 type SortType = "title" | "genre" | "year";
 
-const MoviesOptions: FC<Props> = ({
+const MoviesOptions: FC<MovieOptionsProps> = ({
   setSortedMovies,
   titleFilter,
   setTitleFilter,

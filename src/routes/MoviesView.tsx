@@ -10,12 +10,15 @@ import MoviesContext from "../MoviesContext";
 
 import { Pagination, Container, Grid, Stack, Typography } from "@mui/material";
 
-interface Props {
+interface MoviesViewProps {
   favoriteMovies: Movie[];
   setFavoriteMovies: Dispatch<SetStateAction<Movie[]>>;
 }
 
-const MoviesView: FC<Props> = ({ favoriteMovies, setFavoriteMovies }) => {
+const MoviesView: FC<MoviesViewProps> = ({
+  favoriteMovies,
+  setFavoriteMovies,
+}) => {
   const { movies } = useContext(MoviesContext);
   const [sortedMovies, setSortedMovies] = useState<Movie[]>(movies);
 

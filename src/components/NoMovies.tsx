@@ -2,11 +2,11 @@ import { FC } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-interface Props {
+interface NoMoviesProps {
   isFavorites?: boolean;
 }
 
-const NoMovies: FC<Props> = ({ isFavorites = false }) => {
+const NoMovies: FC<NoMoviesProps> = ({ isFavorites = false }) => {
   let header;
   let subtitle;
 

@@ -8,7 +8,7 @@ import Movie from "./interfaces/Movie";
 
 import MyHeader from "./components/AppHeader";
 import MoviesView from "./routes/MoviesView";
-import MovieAddForm from "./routes/MovieForm";
+import MovieForm from "./routes/MovieForm";
 import MovieDetails from "./routes/MovieDetails";
 
 const App: FC = () => {
@@ -43,7 +43,7 @@ const App: FC = () => {
               />
             }
           />
-          <Route path="/add-form" element={<MovieAddForm isAddForm={true} />} />
+          <Route path="/add-form" element={<MovieForm isAddForm={true} />} />
           <Route path="/movie-details/:movieId" element={<MovieDetails />} />
         </Routes>
       </MoviesContext.Provider>

@@ -19,7 +19,7 @@ import { Box } from "@mui/system";
 
 import { Save, ArrowBack } from "@mui/icons-material";
 
-interface Props {
+interface MovieFormProps {
   isAddForm: boolean;
   initialValues?: Movie;
   setIsEditing?: Dispatch<SetStateAction<boolean>>;
@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
     .nullable(),
 });
 
-const MovieForm: FC<Props> = ({
+const MovieForm: FC<MovieFormProps> = ({
   isAddForm,
   setIsEditing = () => {},
   setMovie = () => {},
