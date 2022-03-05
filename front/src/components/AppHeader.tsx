@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 
 const AppHeader: FC = () => {

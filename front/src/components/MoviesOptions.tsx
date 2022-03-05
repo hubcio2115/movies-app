@@ -7,11 +7,10 @@ import {
   useContext,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "api/movies";
 
-import api from "../api/movies";
-
-import MoviesContext from "../MoviesContext";
-import Movie from "../interfaces/Movie";
+import MoviesContext from "MoviesContext";
+import { Movie } from "utils/interfaces";
 
 import {
   Button,

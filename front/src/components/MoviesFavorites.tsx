@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction } from "react";
 
-import Movie from "../interfaces/Movie";
+import { Movie } from "utils/interfaces";
 
-import MovieCard from "./MovieCard";
-import NoMovies from "./NoMovies";
+import MovieCard from "components/MovieCard";
+import NoMovies from "components/NoMovies";
 
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";

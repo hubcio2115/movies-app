@@ -1,11 +1,10 @@
 import { FC, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import api from "api/movies";
 
-import api from "../api/movies";
+import { Movie } from "utils/interfaces";
 
-import Movie from "../interfaces/Movie";
-
-import MovieForm from "./MovieForm";
+import MovieForm from "routes/MovieForm";
 
 import {
   Button,

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import MoviesContextType from "interfaces/MoviesContext";
+import { MoviesContextType } from "utils/interfaces";
 
 const MoviesContext = createContext<MoviesContextType>({
   movies: [],

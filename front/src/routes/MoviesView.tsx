@@ -1,12 +1,12 @@
 import { FC, useState, Dispatch, SetStateAction, useContext } from "react";
 
-import Movie from "../interfaces/Movie";
+import { Movie } from "utils/interfaces";
 
-import MoviesFavorites from "../components/MoviesFavorites";
-import MoviesOptions from "../components/MoviesOptions";
-import MovieCard from "../components/MovieCard";
-import NoMovies from "../components/NoMovies";
-import MoviesContext from "../MoviesContext";
+import MoviesFavorites from "components/MoviesFavorites";
+import MoviesOptions from "components/MoviesOptions";
+import MovieCard from "components/MovieCard";
+import NoMovies from "components/NoMovies";
+import MoviesContext from "MoviesContext";
 
 import { Pagination, Container, Grid, Stack, Typography } from "@mui/material";
 

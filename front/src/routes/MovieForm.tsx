@@ -2,10 +2,9 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import api from "api/movies";
 
-import api from "../api/movies";
-
-import Movie from "../interfaces/Movie";
+import { Movie } from "utils/interfaces";
 
 import {
   Button,
@@ -16,7 +15,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-
 import { Save, ArrowBack } from "@mui/icons-material";
 
 interface MovieFormProps {

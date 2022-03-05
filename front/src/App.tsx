@@ -1,15 +1,15 @@
 import { FC, useMemo, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import api from "./api/movies";
-import MoviesContext from "./MoviesContext";
+import api from "api/movies";
+import MoviesContext from "MoviesContext";
 
-import Movie from "./interfaces/Movie";
+import { Movie } from "utils/interfaces";
 
-import MyHeader from "./components/AppHeader";
-import MoviesView from "./routes/MoviesView";
-import MovieForm from "./routes/MovieForm";
-import MovieDetails from "./routes/MovieDetails";
+import MyHeader from "components/AppHeader";
+import MoviesView from "routes/MoviesView";
+import MovieForm from "routes/MovieForm";
+import MovieDetails from "routes/MovieDetails";
 
 const App: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
